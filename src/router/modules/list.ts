@@ -32,7 +32,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '基础列表',
         },
-        component: () => import('@/views/list/basicList/index.vue'),
+        component: () => import('@/pages/list/basicList/index.vue'),
       },
       {
         path: 'basic-info/:id?',
@@ -42,7 +42,7 @@ const routes: Array<RouteRecordRaw> = [
           hidden: true,
           activeMenu: 'basic-list',
         },
-        component: () => import('@/views/list/basicList/info.vue'),
+        component: () => import('@/pages/list/basicList/info.vue'),
       },
     ],
   },

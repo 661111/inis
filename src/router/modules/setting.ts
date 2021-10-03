@@ -32,7 +32,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '个人设置',
         },
-        component: () => import('@/views/setting/account/account.vue'),
+        component: () => import('@/pages/setting/account/account.vue'),
       },
       {
         path: 'system',
@@ -40,7 +40,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '系统设置',
         },
-        component: () => import('@/views/setting/system/system.vue'),
+        component: () => import('@/pages/setting/system/system.vue'),
       },
     ],
   },

@@ -32,7 +32,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '基础表单',
         },
-        component: () => import('@/views/form/basicForm/index.vue'),
+        component: () => import('@/pages/form/basicForm/index.vue'),
       },
       {
         path: 'step-form',
@@ -40,7 +40,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '分步表单',
         },
-        component: () => import('@/views/form/stepForm/stepForm.vue'),
+        component: () => import('@/pages/form/stepForm/stepForm.vue'),
       },
       {
         path: 'detail',
@@ -48,7 +48,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '表单详情',
         },
-        component: () => import('@/views/form/detail/index.vue'),
+        component: () => import('@/pages/form/detail/index.vue'),
       },
     ],
   },

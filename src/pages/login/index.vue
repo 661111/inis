@@ -4,9 +4,9 @@
     <div class="view-account-container">
       <div class="view-account-top">
         <div class="view-account-top-logo">
-          <img src="~@/assets/images/account-logo.png" alt="" />
+          <img :src="logo" alt="logo" class="h-30" />
         </div>
-        <div class="view-account-top-desc">Naive Ui Admin中台前端/设计解决方案</div>
+        <div class="view-account-top-desc">不要为小事遮住视线，我们还有更大的世界</div>
       </div>
       <div class="view-account-form">
         <n-form
@@ -29,7 +29,7 @@
             <n-input
               v-model:value="formInline.password"
               type="password"
-              show-password-toggle
+              show-password-on="click"
               placeholder="请输入密码"
             >
               <template #prefix>
@@ -105,8 +105,8 @@
 
   const formRef = ref();
   const message = useMessage();
-  const loading = ref(false);
-  const autoLogin = ref(true);
+  const loading = ref<boolean>(false);
+  const autoLogin = ref<boolean>(false);
 
   const formInline = reactive({
     username: 'admin',
@@ -131,7 +131,7 @@
   const router = useRouter();
   const route = useRoute();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     formRef.value.validate(async (errors) => {
       if (!errors) {
@@ -165,7 +165,7 @@
 
   const onAuthCode = () => {
     formInline.isCaptcha = true;
-  }
+  };
 </script>
 
 <style lang="less" scoped>

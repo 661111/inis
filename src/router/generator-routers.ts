@@ -4,7 +4,7 @@ import { RouteRecordRaw } from 'vue-router';
 import { Layout, ParentLayout } from '@/router/constant';
 import type { AppRouteRecordRaw } from '@/router/types';
 
-const Iframe = () => import('@/views/iframe/index.vue');
+const Iframe = () => import('@/pages/iframe/index.vue');
 const LayoutMap = new Map<string, () => Promise<typeof import('*.vue')>>();
 
 LayoutMap.set('LAYOUT', Layout);
@@ -69,11 +69,11 @@ export const generatorDynamicRouter = (): Promise<RouteRecordRaw[]> => {
 };
 
 /**
- * 查找views中对应的组件文件
+ * 查找pages中对应的组件文件
  * */
-let viewsModules: Record<string, () => Promise<Recordable>>;
+let pagesModules: Record<string, () => Promise<Recordable>>;
 export const asyncImportRoute = (routes: AppRouteRecordRaw[] | undefined): void => {
-  viewsModules = viewsModules || import.meta.glob('../views/**/*.{vue,tsx}');
+  pagesModules = pagesModules || import.meta.glob('../pages/**/*.{vue,tsx}');
   if (!routes) return;
   routes.forEach((item) => {
     if (!item.component && item.meta?.frameSrc) {
@@ -86,7 +86,7 @@ export const asyncImportRoute = (routes: AppRouteRecordRaw[] | undefined): void 
       if (layoutFound) {
         item.component = layoutFound;
       } else {
-        item.component = dynamicImport(viewsModules, component as string);
+        item.component = dynamicImport(pagesModules, component as string);
       }
     } else if (name) {
       item.component = ParentLayout;
@@ -99,23 +99,23 @@ export const asyncImportRoute = (routes: AppRouteRecordRaw[] | undefined): void 
  * 动态导入
  * */
 export const dynamicImport = (
-  viewsModules: Record<string, () => Promise<Recordable>>,
+  pagesModules: Record<string, () => Promise<Recordable>>,
   component: string
 ) => {
-  const keys = Object.keys(viewsModules);
+  const keys = Object.keys(pagesModules);
   const matchKeys = keys.filter((key) => {
-    let k = key.replace('../views', '');
+    let k = key.replace('../pages', '');
     const lastIndex = k.lastIndexOf('.');
     k = k.substring(0, lastIndex);
     return k === component;
   });
   if (matchKeys?.length === 1) {
     const matchKey = matchKeys[0];
-    return viewsModules[matchKey];
+    return pagesModules[matchKey];
   }
   if (matchKeys?.length > 1) {
     console.warn(
-      'Please do not create `.vue` and `.TSX` files with the same file name in the same hierarchical directory under the views folder. This will cause dynamic introduction failure'
+      'Please do not create `.vue` and `.TSX` files with the same file name in the same hierarchical directory under the pages folder. This will cause dynamic introduction failure'
     );
     return;
   }

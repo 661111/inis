@@ -23,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
           extra: renderNew(),
           activeMenu: 'about_index',
         },
-        component: () => import('@/views/about/index.vue'),
+        component: () => import('@/pages/about/index.vue'),
       },
     ],
   },

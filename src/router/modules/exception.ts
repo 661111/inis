@@ -32,7 +32,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '403',
         },
-        component: () => import('@/views/exception/403.vue'),
+        component: () => import('@/pages/exception/403.vue'),
       },
       {
         path: '404',
@@ -40,7 +40,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '404',
         },
-        component: () => import('@/views/exception/404.vue'),
+        component: () => import('@/pages/exception/404.vue'),
       },
       {
         path: '500',
@@ -48,7 +48,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '500',
         },
-        component: () => import('@/views/exception/500.vue'),
+        component: () => import('@/pages/exception/500.vue'),
       },
     ],
   },

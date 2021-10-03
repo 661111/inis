@@ -32,7 +32,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '成功页',
         },
-        component: () => import('@/views/result/success.vue'),
+        component: () => import('@/pages/result/success.vue'),
       },
       {
         path: 'fail',
@@ -40,7 +40,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '失败页',
         },
-        component: () => import('@/views/result/fail.vue'),
+        component: () => import('@/pages/result/fail.vue'),
       },
       {
         path: 'info',
@@ -48,7 +48,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '信息页',
         },
-        component: () => import('@/views/result/info.vue'),
+        component: () => import('@/pages/result/info.vue'),
       },
     ],
   },

@@ -35,7 +35,7 @@ const routes: Array<RouteRecordRaw> = [
           title: '主控台',
           permissions: ['dashboard_console'],
         },
-        component: () => import('@/views/dashboard/console/console.vue'),
+        component: () => import('@/pages/dashboard/console/console.vue'),
       },
       // {
       //   path: 'monitor',
@@ -44,7 +44,7 @@ const routes: Array<RouteRecordRaw> = [
       //     title: '监控页',
       //     permissions: ['dashboard_monitor']
       //   },
-      //   component: () => import('@/views/dashboard/monitor/monitor.vue')
+      //   component: () => import('@/pages/dashboard/monitor/monitor.vue')
       // },
       {
         path: 'workplace',
@@ -54,7 +54,7 @@ const routes: Array<RouteRecordRaw> = [
           keepAlive: true,
           permissions: ['dashboard_workplace'],
         },
-        component: () => import('@/views/dashboard/workplace/workplace.vue'),
+        component: () => import('@/pages/dashboard/workplace/workplace.vue'),
       },
     ],
   },

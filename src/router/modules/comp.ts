@@ -43,7 +43,7 @@ const routes: Array<RouteRecordRaw> = [
             meta: {
               title: '基础表格',
             },
-            component: () => import('@/views/comp/table/basic.vue'),
+            component: () => import('@/pages/comp/table/basic.vue'),
           },
           {
             path: 'editCell',
@@ -51,7 +51,7 @@ const routes: Array<RouteRecordRaw> = [
             meta: {
               title: '单元格编辑',
             },
-            component: () => import('@/views/comp/table/editCell.vue'),
+            component: () => import('@/pages/comp/table/editCell.vue'),
           },
           {
             path: 'editRow',
@@ -59,7 +59,7 @@ const routes: Array<RouteRecordRaw> = [
             meta: {
               title: '整行编辑',
             },
-            component: () => import('@/views/comp/table/editRow.vue'),
+            component: () => import('@/pages/comp/table/editRow.vue'),
           },
         ],
       },
@@ -78,7 +78,7 @@ const routes: Array<RouteRecordRaw> = [
             meta: {
               title: '基础使用',
             },
-            component: () => import('@/views/comp/form/basic.vue'),
+            component: () => import('@/pages/comp/form/basic.vue'),
           },
           {
             path: 'useForm',
@@ -86,7 +86,7 @@ const routes: Array<RouteRecordRaw> = [
             meta: {
               title: 'useForm',
             },
-            component: () => import('@/views/comp/form/useForm.vue'),
+            component: () => import('@/pages/comp/form/useForm.vue'),
           },
         ],
       },
@@ -96,7 +96,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '上传图片',
         },
-        component: () => import('@/views/comp/upload/index.vue'),
+        component: () => import('@/pages/comp/upload/index.vue'),
       },
       {
         path: 'modal',
@@ -104,7 +104,7 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '弹窗扩展',
         },
-        component: () => import('@/views/comp/modal/index.vue'),
+        component: () => import('@/pages/comp/modal/index.vue'),
       },
       {
         path: 'richtext',
@@ -113,7 +113,7 @@ const routes: Array<RouteRecordRaw> = [
           title: '富文本',
           extra: renderNew(),
         },
-        component: () => import('@/views/comp/richtext/vue-quill.vue'),
+        component: () => import('@/pages/comp/richtext/vue-quill.vue'),
       },
       {
         path: 'drag',
@@ -122,7 +122,7 @@ const routes: Array<RouteRecordRaw> = [
           title: '拖拽',
           extra: renderNew(),
         },
-        component: () => import('@/views/comp/drag/index.vue'),
+        component: () => import('@/pages/comp/drag/index.vue'),
       },
     ],
   },
