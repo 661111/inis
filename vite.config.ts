@@ -22,7 +22,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
   const root = process.cwd();
   const env = loadEnv(mode, root);
   const viteEnv = wrapperEnv(env);
-  const { VITE_PUBLIC_PATH, VITE_DROP_CONSOLE, VITE_PORT, VITE_GLOB_PROD_MOCK, VITE_PROXY } =
+  const { VITE_PUBLIC_PATH, VITE_DROP_CONSOLE, VITE_PORT, VITE_GLOB_PROD_MOCK /* VITE_PROXY */ } =
     viteEnv;
   const prodMock = VITE_GLOB_PROD_MOCK;
   const isBuild = command === 'build';
@@ -58,14 +58,14 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     server: {
       host: true,
       port: VITE_PORT,
-      proxy: createProxy(VITE_PROXY),
-      // proxy: {
-      //     '/api': {
-      //         target: '',
-      //         changeOrigin: true,
-      //         rewrite: (path) => path.replace(/^\/api/, '/api/v1')
-      //     }
-      // }
+      // proxy: createProxy(VITE_PROXY),
+      proxy: {
+        '/api': {
+          target: 'https://123.inis.cn',
+          changeOrigin: true,
+          // rewrite: (path) => path.replace(/^\/api/, '/api/v1'),
+        },
+      },
     },
     optimizeDeps: {
       include: [],

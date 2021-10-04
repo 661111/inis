@@ -4,7 +4,7 @@
     <div class="view-account-container">
       <div class="view-account-top">
         <div class="view-account-top-logo">
-          <img :src="logo" alt="logo" class="h-30" />
+          <img :src="logo" alt="logo" />
         </div>
         <div class="view-account-top-desc">不要为小事遮住视线，我们还有更大的世界</div>
       </div>
@@ -16,8 +16,8 @@
           :model="formInline"
           :rules="rules"
         >
-          <n-form-item path="username">
-            <n-input v-model:value="formInline.username" placeholder="请输入用户名">
+          <n-form-item path="account">
+            <n-input v-model:value="formInline.account" placeholder="请输入用户名">
               <template #prefix>
                 <n-icon size="18" color="#808695">
                   <PersonOutline />
@@ -95,11 +95,11 @@
   import { useUserStore } from '@/store/modules/user';
   import { useMessage } from 'naive-ui';
   import { ResultEnum } from '@/enums/httpEnum';
-  import logo from '@/assets/images/logo.png';
+  import logo from '@/assets/images/logo-black.png';
   import { PersonOutline, LockClosedOutline, LogoGithub, LogoFacebook } from '@vicons/ionicons5';
 
   interface FormState {
-    username: string;
+    account: string;
     password: string;
   }
 
@@ -109,20 +109,20 @@
   const autoLogin = ref<boolean>(false);
 
   const formInline = reactive({
-    username: 'admin',
+    account: 'admin',
     password: '123456',
     isCaptcha: false,
   });
 
   const rules = {
-    username: { required: true, message: '请输入用户名', trigger: 'blur' },
+    account: { required: true, message: '请输入用户名', trigger: 'blur' },
     password: { required: true, message: '请输入密码', trigger: 'blur' },
     isCaptcha: {
       required: true,
       type: 'boolean',
       trigger: 'change',
       message: '请点击按钮进行验证码校验',
-      validator: (_, value) => value === true,
+      validator: (_: any, value: boolean) => value === true,
     },
   };
 
@@ -131,20 +131,17 @@
   const router = useRouter();
   const route = useRoute();
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = (e: { preventDefault: () => void }): void => {
     e.preventDefault();
-    formRef.value.validate(async (errors) => {
+    formRef.value.validate(async (errors: any) => {
       if (!errors) {
-        const { username, password } = formInline;
+        const { account, password } = formInline;
         message.loading('登录中...');
         loading.value = true;
 
-        const params: FormState = {
-          username,
-          password,
-        };
+        const params: FormState = { account, password };
 
-        const { code, message: msg } = await userStore.login(params);
+        const { code, msg } = await userStore.login(params);
 
         if (code == ResultEnum.SUCCESS) {
           const toPath = decodeURIComponent((route.query?.redirect || '/') as string);
@@ -156,6 +153,7 @@
           });
         } else {
           message.info(msg || '登录失败');
+          loading.value = false;
         }
       } else {
         message.error('请填写完整信息，并且进行验证码校验');
@@ -163,7 +161,7 @@
     });
   };
 
-  const onAuthCode = () => {
+  const onAuthCode = (): void => {
     formInline.isCaptcha = true;
   };
 </script>
@@ -185,6 +183,10 @@
     &-top {
       padding: 32px 0;
       text-align: center;
+      &-logo {
+        width: 150px;
+        margin: 25px auto;
+      }
 
       &-desc {
         font-size: 14px;

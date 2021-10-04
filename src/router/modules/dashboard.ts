@@ -24,6 +24,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: 'Dashboard',
       icon: renderIcon(DashboardOutlined),
+      // 这里配置父级路由需要哪些权限可访问 这里是子路由权限集合
       permissions: ['dashboard_console', 'dashboard_console', 'dashboard_workplace'],
       sort: 0,
     },
@@ -33,6 +34,7 @@ const routes: Array<RouteRecordRaw> = [
         name: `${routeName}_console`,
         meta: {
           title: '主控台',
+          // 配置该路由需要哪些权限可访问 这里是针对单个路由
           permissions: ['dashboard_console'],
         },
         component: () => import('@/pages/dashboard/console/console.vue'),

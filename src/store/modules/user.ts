@@ -51,27 +51,27 @@ export const useUserStore = defineStore({
     setAvatar(avatar: string) {
       this.avatar = avatar;
     },
-    setPermissions(permissions) {
+    setPermissions(permissions: any[]) {
       this.permissions = permissions;
     },
-    setUserInfo(info) {
+    setUserInfo(info: string) {
       this.info = info;
     },
     // 登录
-    async login(userInfo) {
+    async login(userInfo: any) {
       try {
-        const response = await login(userInfo);
-        const { result, code } = response;
+        const response = await login({ ...userInfo, mode: 'login' });
+        const { data, code } = response;
         if (code === ResultEnum.SUCCESS) {
           const ex = 7 * 24 * 60 * 60 * 1000;
-          storage.set(ACCESS_TOKEN, result.token, ex);
-          storage.set(CURRENT_USER, result, ex);
+          storage.set(ACCESS_TOKEN, data['login-token'], ex);
+          storage.set(CURRENT_USER, data.user, ex);
           storage.set(IS_LOCKSCREEN, false);
-          this.setToken(result.token);
-          this.setUserInfo(result);
+          this.setToken(data['login-token']);
+          this.setUserInfo(data.user);
         }
         return Promise.resolve(response);
-      } catch (e) {
+      } catch (e: unknown) {
         return Promise.reject(e);
       }
     },

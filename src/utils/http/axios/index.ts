@@ -61,11 +61,18 @@ const transform: AxiosTransform = {
       return reject(data);
     }
     //  这里 code，result，message为 后台统一的字段，需要在 types.ts内修改为项目自己的接口返回格式
-    const { code, result, message } = data;
+    const { code, data: result, msg: message } = data;
+    console.log(Reflect.has(data, 'code'));
     // 请求成功
-    const hasSuccess = data && Reflect.has(data, 'code') && code === ResultEnum.SUCCESS;
+    // data && Reflect.has(data, 'code') &&
+    const hasSuccess: boolean = code === ResultEnum.SUCCESS;
     // 是否显示提示信息
     if (isShowMessage) {
+      console.log(
+        `hasSuccess:${hasSuccess}`,
+        `successMessageText:${successMessageText}`,
+        `isShowSuccessMessage:${isShowSuccessMessage}`
+      );
       if (hasSuccess && (successMessageText || isShowSuccessMessage)) {
         // 是否显示自定义信息提示
         Message.success(successMessageText || message || '操作成功！');
@@ -90,7 +97,7 @@ const transform: AxiosTransform = {
     // 接口请求错误，统一提示错误信息
     if (code === ResultEnum.ERROR) {
       if (message) {
-        Message.error(data.message);
+        Message.error(message);
         Promise.reject(new Error(message));
       } else {
         const msg = '操作失败,系统异常!';
@@ -219,8 +226,8 @@ const transform: AxiosTransform = {
         });
         return;
       }
-    } catch (error) {
-      throw new Error(error);
+    } catch (error: unknown) {
+      throw new Error(`${error}`);
     }
     // 请求是否被取消
     const isCancel = axios.isCancel(error);
@@ -237,7 +244,10 @@ const Axios = new VAxios({
   timeout: 10 * 1000,
   // 接口前缀
   prefixUrl: urlPrefix,
-  headers: { 'Content-Type': ContentTypeEnum.JSON },
+  headers: {
+    'Content-Type': ContentTypeEnum.JSON,
+    token: ContentTypeEnum.TOKEN,
+  },
   // 数据处理方式
   transform,
   // 配置项，下面的选项都可以在独立的接口请求中覆盖

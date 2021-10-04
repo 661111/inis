@@ -31,4 +31,6 @@ export enum ContentTypeEnum {
   FORM_URLENCODED = 'application/x-www-form-urlencoded;charset=UTF-8',
   // form-data  上传
   FORM_DATA = 'multipart/form-data;charset=UTF-8',
+  // token
+  TOKEN = 'b7f33f75c65595cc3362e47c3891f02d',
 }
